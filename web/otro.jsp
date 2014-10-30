@@ -1,21 +1,32 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>${amigo.nombre}</title>
+        <c:set value="${sessionScope.u}" var="usuario" scope="session"/>
     </head>
     <body>
-        <h1>Luiso estuvo aqui!</h1>
-        
-        <!-- 
-        Lenguaje python 
-        print "Error 404"
-        print "Error 500"
-        print "Error Class Path not found"
-        print "ORA-600"
-        print "0099085xh memory dump"
-        -->
+        <div style="margin-right: 30px;float:  left">
+            <center><h2>UL Connect</h2>
+            
+            <p><img src="${usuario.codigo}.jpg" style="height: 100px; width: 100px"></p>
+            
+            <h4>${usuario.nombre}</h4>
+            </center>
+            <p> <a href="perfil.jsp">Mi Perfil</a> </p>
+            <p> <a href="AmigosServlet">Mis Amigos</a> </p>
+        </div>
+            
+        <div style="float: left">
+            <div>
+                <div><h2>Amigo ${amigo.nombre}</h2></div>
+                <div><img src="${amigo.codigo}.jpg" style="height: 100px; width: 100px"></div>
+                <div><h4>${perfilA.nombre}</h4></div>
+            </div>
+        </div>
+
        
     </body>
 </html>

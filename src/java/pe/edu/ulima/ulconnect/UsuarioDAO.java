@@ -77,4 +77,18 @@ public class UsuarioDAO {
                 em.createQuery("SELECT u  FROM Usuario u where u.id <> "+a.getId(), Usuario.class);
         return query.getResultList();
     }
+    
+    public Usuario datosAmigo(String codigo){
+        TypedQuery<Usuario> query = 
+                em.createQuery("select u from Usuario u "
+                        + " WHERE u.codigo=:cod", 
+                        Usuario.class);
+        query.setParameter("cod", codigo);
+        try{
+            return query.getSingleResult();
+        }catch(NoResultException ex){
+            return null;    
+        }
+    }
+    
 }

@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pe.edu.ulima.ulconnect;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,13 +17,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author profw31
+ * @author B
  */
 @Entity
 @Table(name = "usuario")
@@ -41,15 +44,21 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Size(max = 8)
+    @Size(max = 45)
     @Column(name = "codigo")
     private String codigo;
-    @Size(max = 45)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "nombre")
     private String nombre;
-    @Size(max = 20)
+    @Size(max = 45)
     @Column(name = "password")
     private String password;
+    @OneToMany(mappedBy = "amigoP")
+    private Collection<Amistad> amistadCollection;
+    @OneToMany(mappedBy = "amigoO")
+    private Collection<Amistad> amistadCollection1;
     @JoinColumn(name = "perfil_id", referencedColumnName = "id")
     @ManyToOne
     private Perfil perfilId;
@@ -59,6 +68,11 @@ public class Usuario implements Serializable {
 
     public Usuario(Integer id) {
         this.id = id;
+    }
+
+    public Usuario(Integer id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
     }
 
     public Integer getId() {
@@ -91,6 +105,24 @@ public class Usuario implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @XmlTransient
+    public Collection<Amistad> getAmistadCollection() {
+        return amistadCollection;
+    }
+
+    public void setAmistadCollection(Collection<Amistad> amistadCollection) {
+        this.amistadCollection = amistadCollection;
+    }
+
+    @XmlTransient
+    public Collection<Amistad> getAmistadCollection1() {
+        return amistadCollection1;
+    }
+
+    public void setAmistadCollection1(Collection<Amistad> amistadCollection1) {
+        this.amistadCollection1 = amistadCollection1;
     }
 
     public Perfil getPerfilId() {

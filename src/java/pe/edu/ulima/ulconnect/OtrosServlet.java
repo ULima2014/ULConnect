@@ -7,6 +7,7 @@ package pe.edu.ulima.ulconnect;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author bryan
  */
 public class OtrosServlet extends HttpServlet {
-
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -56,7 +57,13 @@ public class OtrosServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String codAmigo = request.getParameter("param1");
+        Usuario amigo = UsuarioDAO.getInstance().datosAmigo(codAmigo);
+        request.setAttribute("amigo", amigo);
+        Perfil perfilA = PerfilDAO.getInstance().get(amigo.getPerfilId().getId());
+        request.setAttribute("perfilA", perfilA);
+        RequestDispatcher rd = request.getRequestDispatcher("otro.jsp");
+        rd.forward(request, response);
     }
 
     /**
