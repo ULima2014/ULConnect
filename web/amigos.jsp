@@ -18,6 +18,7 @@
             </center>
             <p> <a href="perfil.jsp">Mi Perfil</a> </p>
             <p> <a href="AmigosServlet">Mis Amigos</a> </p>
+            <p> <a href="BuscarServlet">Buscar amigos</a> </p>
         </div>
             
             <div style="float: left">

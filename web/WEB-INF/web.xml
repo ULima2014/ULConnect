@@ -24,6 +24,14 @@
         <servlet-name>OtrosServlet</servlet-name>
         <servlet-class>pe.edu.ulima.ulconnect.OtrosServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BuscarServlet</servlet-name>
+        <servlet-class>pe.edu.ulima.ulconnect.AgregarAmigosServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BuscarAmigoServlet</servlet-name>
+        <servlet-class>pe.edu.ulima.ulconnect.BuscarAmigoServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MostrarRegistroServlet</servlet-name>
         <url-pattern>/MostrarRegistroServlet</url-pattern>
@@ -47,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>OtrosServlet</servlet-name>
         <url-pattern>/OtrosServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuscarServlet</servlet-name>
+        <url-pattern>/BuscarServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuscarAmigoServlet</servlet-name>
+        <url-pattern>/BuscarAmigoServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

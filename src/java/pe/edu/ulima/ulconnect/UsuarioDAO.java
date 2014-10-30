@@ -6,6 +6,7 @@
 
 package pe.edu.ulima.ulconnect;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -73,9 +74,13 @@ public class UsuarioDAO {
         return query.getSingleResult();
     }
     public List<Usuario> recuperarAmigos(Usuario a){
-        TypedQuery<Usuario> query = 
-                em.createQuery("SELECT u  FROM Usuario u where u.id <> "+a.getId(), Usuario.class);
-        return query.getResultList();
+        List<Amistad> amistad = AmistadDAO.getInstance().amistad(a);
+        List<Usuario> lista=new ArrayList<>();
+        for(Amistad element : amistad){
+            Usuario u = get(element.getAmigoO().getId());
+            lista.add(u);
+        }
+        return lista;
     }
     
     public Usuario datosAmigo(String codigo){

@@ -21,9 +21,16 @@
             
         <div style="float: left">
             <div>
-                <div><h2>Amigo ${amigo.nombre}</h2></div>
+                <div>
+                    <h2>Amigo ${amigo.nombre} &nbsp;&nbsp;&nbsp;
+                        <c:if test="${isfriend = false}">
+                            <a href="AgregarAmigosServlet.jsp"><img src="mas.jpg" style="height: 25px; width: 25px"></a>
+                        </c:if>    
+                    </h2>
+                </div>
                 <div><img src="${amigo.codigo}.jpg" style="height: 100px; width: 100px"></div>
-                <div><h4>${perfilA.nombre}</h4></div>
+                <div><h3>${perfilA.nombre}</h3></div>
+                <div><h3>Amigos</h3></div>
             </div>
         </div>
 

@@ -23,6 +23,18 @@ public class AmistadDAO {
         }
         return amistadDAO;
     }
+    public void create(Usuario u1, Usuario u2){
+        Amistad a1 = new Amistad();
+        a1.setAmigoP(u1);
+        a1.setAmigoO(u2);
+        Amistad a2 = new Amistad();
+        a2.setAmigoO(u1);
+        a2.setAmigoP(u2);
+        em.getTransaction().begin();
+        em.persist(a1);
+        em.persist(a2);
+        em.getTransaction().commit();
+    }
     private AmistadDAO(){
         emf = Persistence.createEntityManagerFactory("ULConnectPU");
         em = emf.createEntityManager();
@@ -42,5 +54,17 @@ public class AmistadDAO {
         }catch(NoResultException ex){
             return null;    
         }
+    }
+    public List<Amistad> amistad(Usuario u){
+        TypedQuery<Amistad> query = 
+                em.createQuery("Select a from Amistad a WHERE a.amigoP=:cod", Amistad.class);
+                query.setParameter("cod", u);
+        return query.getResultList();
+    }
+    public List<Amistad> noamistad(Usuario u){
+        TypedQuery<Amistad> query = 
+                em.createQuery("Select distinct a from Amistad a WHERE a.amigoP<>:cod", Amistad.class);
+                query.setParameter("cod", u);
+        return query.getResultList();
     }
 }
