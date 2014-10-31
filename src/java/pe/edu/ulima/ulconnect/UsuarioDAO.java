@@ -41,7 +41,11 @@ public class UsuarioDAO {
         em.persist(usuario);
         em.getTransaction().commit();
     }
-    
+    public List<Usuario> retrieve(){
+        TypedQuery<Usuario> query = 
+                em.createQuery("select u from Usuario u", Usuario.class);
+        return query.getResultList();
+    }
     public Usuario get(String codigo, String password){
         TypedQuery<Usuario> query = 
                 em.createQuery("select u from Usuario u "
@@ -81,6 +85,24 @@ public class UsuarioDAO {
             lista.add(u);
         }
         return lista;
+    }
+    public List<Usuario> recuperarNoAmigos(Usuario a){
+        List<Amistad> amistad = AmistadDAO.getInstance().amistad(a);
+        List<Usuario> todos=retrieve();
+        
+        for(int j=0; j<amistad.size();j++){
+            for(int i=0; i<todos.size();i++){
+                if(todos.get(i).getId()==a.getId()){
+                    todos.remove(todos.get(i));
+                }
+                if(amistad.get(j).getAmigoO().getId()==todos.get(i).getId()){
+                    todos.remove(todos.get(i));
+                    break;
+                }
+            }
+        }
+        
+        return todos;
     }
     
     public Usuario datosAmigo(String codigo){

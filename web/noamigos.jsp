@@ -1,10 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Bienvenido</title>
+        <title>Mis Amigos</title>
         <c:set value="${sessionScope.u}" var="usuario" scope="session"/>
     </head>
     <body>
@@ -19,13 +19,15 @@
             <p> <a href="perfil.jsp">Mi Perfil</a> </p>
             <p> <a href="AmigosServlet">Mis Amigos</a> </p>
         </div>
+            
             <div style="float: left">
+                <c:forEach var="noamigo" items="${noamigos}">
                 <div>
-                    <h3>¿Cómo te sientes?</h3>
-                    <div><textarea id="publicacion" name="publicacion" style="margin: 0px; width: 572px; height: 96px;"></textarea></div>
-                    <div><button id="btn_publicar" name="btn_publicar">Publicar</button></div>
+                    <p><img src="${noamigo.codigo}.jpg" style="height: 100px; width: 100px"></p>
+                    <p><a href="OtrosServlet?param1=${noamigo.codigo}">${noamigo.nombre}</a></p>
                 </div>
+                    
+                </c:forEach>
             </div>
-        
     </body>
 </html>

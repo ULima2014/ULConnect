@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 public class AmistadDAO {
@@ -55,16 +56,20 @@ public class AmistadDAO {
             return null;    
         }
     }
+    /*
     public List<Amistad> amistad(Usuario u){
         TypedQuery<Amistad> query = 
                 em.createQuery("Select a from Amistad a WHERE a.amigoP=:cod", Amistad.class);
                 query.setParameter("cod", u);
         return query.getResultList();
+    }*/
+    public List<Amistad> amistad(Usuario u) {
+        String jpql = "SELECT a from Amistad a WHERE a.amigoP= ?1";
+        Query q = em.createQuery(jpql);
+        q.setParameter(1, u);
+        List l = q.getResultList();
+        
+        return l;
     }
-    public List<Amistad> noamistad(Usuario u){
-        TypedQuery<Amistad> query = 
-                em.createQuery("Select distinct a from Amistad a WHERE a.amigoP<>:cod", Amistad.class);
-                query.setParameter("cod", u);
-        return query.getResultList();
-    }
+    
 }

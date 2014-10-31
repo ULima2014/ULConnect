@@ -32,6 +32,10 @@
         <servlet-name>BuscarAmigoServlet</servlet-name>
         <servlet-class>pe.edu.ulima.ulconnect.BuscarAmigoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AgregarAmigosServlet</servlet-name>
+        <servlet-class>pe.edu.ulima.ulconnect.AgregarAmigosServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MostrarRegistroServlet</servlet-name>
         <url-pattern>/MostrarRegistroServlet</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>BuscarAmigoServlet</servlet-name>
         <url-pattern>/BuscarAmigoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AgregarAmigosServlet</servlet-name>
+        <url-pattern>/AgregarAmigosServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

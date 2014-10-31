@@ -45,6 +45,7 @@ public class AmigosServlet extends HttpServlet {
         Usuario actual = (Usuario)ses.getAttribute("u");
         List<Usuario>amigos = UsuarioDAO.getInstance().recuperarAmigos(actual);
         request.setAttribute("amigos", amigos);
+        ses.setAttribute("isf", true);
         RequestDispatcher rd = request.getRequestDispatcher("amigos.jsp");
         rd.forward(request, response);
     }

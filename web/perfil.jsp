@@ -18,6 +18,7 @@
             
             <h4>${usuario.nombre}</h4>
             </center>
+            <p> <a href="bienvenido.jsp">Bienvenido</a> </p>
             <p> <a href="perfil.jsp">Mi Perfil</a> </p>
             <p> <a href="AmigosServlet">Mis Amigos</a> </p>
         </div>

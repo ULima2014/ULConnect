@@ -7,11 +7,13 @@ package pe.edu.ulima.ulconnect;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -57,11 +59,14 @@ public class OtrosServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession ses = request.getSession();
         String codAmigo = request.getParameter("param1");
-        Usuario amigo = UsuarioDAO.getInstance().datosAmigo(codAmigo);
-        request.setAttribute("amigo", amigo);
-        Perfil perfilA = PerfilDAO.getInstance().get(amigo.getPerfilId().getId());
-        request.setAttribute("perfilA", perfilA);
+        Usuario otro = UsuarioDAO.getInstance().datosAmigo(codAmigo);
+        ses.setAttribute("otro", otro);
+        Perfil perfilA = PerfilDAO.getInstance().get(otro.getPerfilId().getId());
+        ses.setAttribute("perfilA", perfilA);
+        List<Usuario> AmigosO = UsuarioDAO.getInstance().recuperarAmigos(otro);
+        ses.setAttribute("AmigosO", AmigosO);
         RequestDispatcher rd = request.getRequestDispatcher("otro.jsp");
         rd.forward(request, response);
     }
